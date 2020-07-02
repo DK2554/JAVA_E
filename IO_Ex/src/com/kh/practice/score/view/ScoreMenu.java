@@ -17,6 +17,7 @@ public class ScoreMenu {
 			System.out.println("1. 성적 저장 ");
 			System.out.println("2. 성적 출력");
 			System.out.println("9. 끝내기 ");
+			System.out.print("입력 : ");
 			int num=sc.nextInt();
 			switch(num) {
 			case 1: saveScore();break;
@@ -30,14 +31,14 @@ public class ScoreMenu {
 		
 	}
 	public void saveScore() {
+		int num=0;
 		while(true) {
-			int num=0;
-			System.out.println(num+"번 째 학생 정보 기록");
+			sc.nextLine();
+			System.out.println((num+1)+"번 째 학생 정보 기록");
 			System.out.print("이름 : ");
 			String name=sc.nextLine();
 			System.out.print("국어 점수 : ");
 			int kor=sc.nextInt();
-			sc.nextLine();
 			System.out.print("영어 점수 : ");
 			int eng=sc.nextInt();
 			System.out.print("수학 점수 : ");
@@ -48,9 +49,12 @@ public class ScoreMenu {
 			System.out.println("그만 입력하시려면 N또는 n 입력"
 					+ "계속하시려면 아무키나 눌러주세요");
 			char sp=sc.next().charAt(0);
-			if(sp=='N'&&sp=='n') {
-				return;
+
+			
+			if(sp=='N'||sp=='n') {
+				break;
 			}else {
+				num++;
 				continue;
 			}
 			

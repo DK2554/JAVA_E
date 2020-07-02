@@ -1,4 +1,4 @@
-package com.collection.model.vo;
+package com.ob.vo;
 
 public class Person implements Comparable<Person>{
 	private String name;
@@ -50,6 +50,7 @@ public class Person implements Comparable<Person>{
 		}
 		return false;
 	}
+	
 	//compareto를 오버라이딩해서
 	//person의 이름으로 오름차순을 하겠다
 	@Override
@@ -63,7 +64,8 @@ public class Person implements Comparable<Person>{
 		//return this.age-p.age;//오름차순 정렬
 		return p.age-this.age;//내림차순
 	}
-	
+
+		
 	
 
 }

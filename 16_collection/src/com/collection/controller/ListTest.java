@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
+import com.collectioc.model.vo.Member;
 import com.collection.model.vo.Person;
 
 public class ListTest {
@@ -60,10 +62,44 @@ public class ListTest {
 			if(list.get(i) instanceof Person) {
 				Person p=(Person)list.get(i);
 				System.out.println("객체가 Person 일때만 실행");
+				//객체의 이름과 나이만 가져오는 소스
 				System.out.println(p.getName()+p.getAge());
 			}
 			
 		}
+		//list의 원하는 위치에 객체 넣기
+				//add(인덱스, 값) -> 해당 인덱스 위치에 값을 넣는것
+				System.out.println("==== 원하는 list위치에 새 데이터 넣기 ====");
+				
+				printList(list);
+				
+				list.add(new Person("김도환", 27,"경기도"));
+				System.out.println("add(값)으로 추가");
+				printList(list);
+				System.out.println("인덱스를 지정하여 add()활용 데이터 추가");
+				list.add(2,new Person("김민지",25,"서울시"));
+				printList(list);
+				
+				//ArrayList를 생성하면을 하면 생성된 배열과 유사한 저장공간 빈공간
+				//데이터가 없는 상태!
+				ArrayList list2=new ArrayList();
+				//System.out.println(list2.get(0));//에러발생
+				//list에 데이터가 있을때 접근해라!!
+				System.out.println(list2.size());
+				//if(list2.size()!=0) {//데이터가 있으면....
+				if(list2.size()>0) {//데이터가 있으면....
+					System.out.println(list2.get(0));
+				}
+				//isEmpty()매소드를 이용할 수 있음
+				//데이터가 없으면 true, 있으면 false;
+				System.out.println("=== isEmpty()확인해보기 ===");
+				System.out.println(list2.isEmpty());
+				list2.add("유병승");
+				System.out.println(list2.isEmpty());
+				if(!list2.isEmpty()) {
+					//데이터가 있으면 fasle 없으면 true를 반환
+					System.out.println(list2.get(0));
+				}
 		//for each문
 		
 		ArrayList names=new ArrayList();
@@ -97,6 +133,8 @@ public class ListTest {
 		//set(인덱스 번호,수정할 값)
 		//추가와 변경
 		persons.add(4,new Person("홍길동",30,"서울"));
+		System.out.println("====값을 추가한 후 출력하기=====");
+		printList(persons);
 		persons.set(3, new Person("홍지운",28,"광주"));
 		System.out.println("====값을 수정한 후 출력하기=====");
 		printList(persons);
@@ -109,7 +147,9 @@ public class ListTest {
 		printList(persons);
 		
 		//동일한 객체 지우기
+		
 		persons.remove(new Person("김가남",27,"서울"));
+		
 		System.out.println("====동일한 객체 삭제하기====");
 		printList(persons);
 		
@@ -147,6 +187,7 @@ public class ListTest {
 		//collections객체의 sort()메소드를 이용하면 손쉽게
 		//정렬을 할 수가 있음.
 		Collections.sort(list);//오름차순 정렬);
+		//기본적인 오름차순정렬
 		System.out.println("====오름차순정렬하기====");
 		printList(list);
 		
@@ -234,8 +275,98 @@ public class ListTest {
 			System.out.println(it.next());
 			
 		}
-			
+		//set은 for each문을 이용해서도 순회가 가능함
+		for(Object o : set) {
+			System.out.println(o);
+		}
 		
+		
+		HashSet random=new HashSet();
+//		for(int i=0;i<7;i++) {
+//			random.add((int)(Math.random()*44)+1);
+//		}
+		//중복값 제거하고 값받기
+		while(true) {
+			random.add((int)(Math.random()*44)+1);
+			if(random.size()==7) {
+				break;
+				//메소드->size() -set에 있는 데이터 갯수 확인
+			}
+		}
+		//Iterator 한번사용하면 다시 생성해서 사용
+		// it=random.iterator();//다시 사용하는 방법
+		 it=random.iterator();
+			while(it.hasNext()) {
+				int name=(int)it.next();
+				if(name==3) {
+					System.out.println(name);
+				}
+			}
+		 
+		
+		//set에서 특정값을 불러오려면?
+		//set객체에 유병승만 출력
+		System.out.println("=================");
+		Iterator dd=set.iterator();
+		while(dd.hasNext()) {
+			String nn=(String)dd.next();
+			if(nn.equals("유병승")) {
+				
+				System.out.println(nn);
+				}
+			}
+		
+		
+		//객체중복값 제거->equals,hashcode값
+		Set member=new HashSet();
+		member.add(new Member("admin","1234","관리자",'남'));
+		member.add(new Member("user01","1111","유저1",'남'));
+		member.add(new Member("user02","2222","유저2",'여'));
+		member.add(new Member("user03","3333","유저3",'남'));
+		member.add(new Member("admin","1234","관리자",'남'));
+		
+		printSet(member);
+		
+		//set에 있는 데이터 삭제하기
+		//remove(객체)메소드를 이용해서 삭제 가능
+		member.remove(new Member("admin","1234","관리자",'남'));
+		System.out.println("삭제후 객체");
+		printSet(member);
+		//set에 있는 데이터를 모두 지우려면
+		System.out.println("====전체 데이터 지우기 =====");
+		member.clear();
+		printSet(member);
+		
+		List list=new ArrayList();
+		for(int i=0;i<10;i++) {
+			list.add((int)(Math.random()*20)+1);
+		}
+		printList(list);
+		//리스트의 중복값을 Set을이용해서 제거하는 방법
+		//리스트를 해쉬셋에 매개변수로 넣고
+		//해쉬셋을 통해 중복값을 제거후에 다시 리스트로 생성
+		//매개변수로 해쉬셋으로 중복값 제거한 값을 넣는다
+		
+		HashSet test=new HashSet(list);
+		list=new ArrayList(test);
+		printList(list);
+		
+		//Set도 배열로 변환할 수 있다.
+		
+		printSet(set);
+		Object[] objs=set.toArray();
+		System.out.println(objs[0]);
+//		for(Object o : objs) {
+//			System.out.println(o);
+//		}
+		
+		
+	}
+	private void printSet(Set s) {
+		Iterator it=s.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
 	}
 	
 	
